@@ -5,8 +5,8 @@ We use `Jest` and `Enzyme` to test our components and functions.
 ## Table of Contents
 
 1. [Intro](#intro)
-1. [Describe](#describe)
-1. [It](#it)
+1. [Describe](#describe-blocks)
+1. [It](#it-blocks)
 
 ## Intro
 
@@ -87,18 +87,18 @@ import * as utils from '../utils/getFullname';
   });
 ```
 
-## Describe
+## Describe-blocks
 
-- How to write a describes, our way. Let's say you have this cases; if `age` prop true, render `Adult` component, otherwise render `Child`
+- How to write a describes, our way. Let's say you have this case; if `age` prop is true, render `Adult` component, otherwise render `Child`
 
 ```jsx
 import React from 'react';
 import { shallow } from 'enzyme';
 import Adult from '../Adult';
 import Child from '../Child';
-import Family from '../Family';
+import Component from '../Component';
 
-describe('Family', () => {
+describe('Component', () => {
   describe('when age is provided', () => {
     it('renders Adult', () => {
       const age = 'age';
@@ -120,7 +120,7 @@ describe('Family', () => {
 });
 ```
 
-## It
+## It-blocks
 
 - When writing your it-blocks there is no need to specify the word "it" in the description
 
