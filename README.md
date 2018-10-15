@@ -5,7 +5,7 @@ This is how we write Javascript code.
 Other Style Guides
 
 - [React](react/)
-- [Testing](test/)
+- [Testing](testing/)
 - [Emotion](css/-in-javascript)
 - [Linters](linters/)
 
