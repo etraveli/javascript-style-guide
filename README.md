@@ -292,7 +292,7 @@ Other Style Guides
     return false;
   });
 
-  // better
+  // best
   inbox.filter(
     ({ subject, author }) =>
       subject === 'Mockingbird' ? author === 'Harper Lee' : false
