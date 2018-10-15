@@ -86,7 +86,7 @@ This is how we write React.
 
 ## Destructuring
  - Always destruct when possible
-    > Why? It reads better
+    > Why? It improves readability
 
     ```jsx
     // bad
@@ -150,7 +150,7 @@ This is how we write React.
   import Footer from './Footer';
   ```
 
-  - Using `container` and `text-resolvers` in render method, leave out the suffix.
+- Using `container` and `text-resolvers` in render method, leave out the suffix.
 
   ```jsx
   // file 1 contents
@@ -173,7 +173,7 @@ This is how we write React.
     ```jsx
     // bad
     import SeatMapHeader from './SeatMapHeader';
-    
+
     // good
     import Header from './SeatMapHeader';  
     ```
@@ -310,7 +310,7 @@ This is how we write React.
     ```
 
  - Use alphabetic order
-    > Why? It reads better
+    > Why? It improves readability
   
     ```jsx
       // bad 
@@ -326,7 +326,8 @@ This is how we write React.
     ```
 
 ## Methods
-  - Do not methods use arrow functions
+  - Do not bind methods, use arrow functions
+  > Why? Less lines of codes and follow our convention with arrow functions.
 
     ```jsx
     // bad
