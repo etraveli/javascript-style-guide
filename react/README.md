@@ -169,6 +169,14 @@ This is how we write React.
   import CheckBox from '../containers/CheckBoxContainer';
   import Dropdown from '../text-resolvers/DropdownTextResolver';
   ```
+ - Keep "context" in file names, favouring `SeatMapHeader` over `Header`, but drop it in imports
+    ```jsx
+    // bad
+    import SeatMapHeader from './SeatMapHeader';
+    
+    // good
+    import Header from './SeatMapHeader';  
+    ```
 
 - **Higher-order Component Naming**: When possible use the prefix `with...` e.g. `WithLoading`
 
