@@ -10,22 +10,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
 
 ## Intro
 
-- Testing a components length
-
-  ```jsx
-  import React from 'react';
-  import { shallow } from 'enzyme';
-  import Component from '../Component';
-
-  describe('Component', () => {
-    it('is rendered', () => {
-      const component = shallow(<Component />);
-      expect(component.length).toBe(1);
-    });
-  });
-  ```
-
-- Testing a components prop. Have one it-block for each prop
+- Testing a components prop. Have one prop test per it-block. Do not group prop test.
 
   ```jsx
   // bad
@@ -89,7 +74,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
   ```jsx
   import * as utils from '../utils/getFullname';
 
-    it('passes prop name', () => {
+    it('renders name', () => {
       const firstName = 'firstName';
       const lastName = 'lastName';
       const name = 'name';
