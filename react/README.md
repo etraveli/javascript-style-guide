@@ -328,7 +328,7 @@ This is how we write React.
     ```
 
 ## Methods
-  - Do not class property, use arrow functions
+  - Do not use class property, use arrow functions
     > Why? Less lines of codes and follow our convention with arrow functions.
 
     ```jsx
@@ -388,14 +388,10 @@ This is how we write React.
 
 ## PropTypes
 
-  - How to define `PropTypes` and `defaultProps`
+  - How to define `PropTypes` and `defaultProps`. _Define the variable with PascalCase since `PropTypes` is a constructor._
   
 
     ```jsx
-    // bad 
-    import PropTypes from 'prop-types';
-    
-    // good
     import PropTypes from 'prop-types';
     
     const User = ({ age, children, name }) => (
