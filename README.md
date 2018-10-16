@@ -6,7 +6,7 @@ Other Style Guides
 
 - [React](react/)
 - [Testing](testing/)
-- [Emotion](css/-in-javascript)
+- [CSS](css-in-javascript)
 - [Linters](linters/)
 
 ## Table of Contents
