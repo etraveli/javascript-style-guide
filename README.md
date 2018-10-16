@@ -39,12 +39,14 @@ Other Style Guides
   ```javascript
   // bad
   var a = 1;
-  var b = 2;
-  let b = 2;
+  var b = {};
+  let c = 2;
+  let d = [];
 
   // good
   const a = 1;
-  const b = 2;
+  const b = {};
+  const c = [];
   ```
 
 <a name="references--disallow-var"></a><a name="1.2"></a>
