@@ -797,6 +797,7 @@ Other Style Guides
     if (value == 1) {
       // ...
     }
+
     // good 
     if (value === 1) {
       // ...
@@ -984,11 +985,11 @@ Other Style Guides
   // bad
   const OBJEcttsssss = {};
   const this_is_my_object = {};
-  function c() {}
+  const c = () => {}
 
   // good
   const thisIsMyObject = {};
-  function thisIsMyFunction() {}
+  const thisIsMyFunction = () => {}
   ```
 
   <a name="naming--PascalCase"></a><a name="13.3"></a>

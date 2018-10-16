@@ -26,6 +26,7 @@ This is how we write React.
 ## Class
 
 - When using Class component import `Component` directly
+    > Why? It improves readability
 
   ```jsx
   // bad
@@ -44,6 +45,7 @@ This is how we write React.
   ```
 
 - When using internal state without props reference, don't use a constructor
+    > Why? Less code is better.
 
   ```jsx
   // bad
@@ -71,7 +73,7 @@ This is how we write React.
 ## Stateless
 
 - When not using internal state, use stateless component
-
+  > Why? We want to keep as functional as possible
   ```jsx
   // bad
   class User extends Component {
@@ -150,7 +152,16 @@ This is how we write React.
   import Footer from './Footer';
   ```
 
-- Using `container` and `text-resolvers` in render method, leave out the suffix.
+   - Keep "context" in file names, favouring `SeatMapHeader` over `Header`, but drop it in imports
+    ```jsx
+    // bad
+    import SeatMapHeader from './SeatMapHeader';
+
+    // good
+    import Header from './SeatMapHeader';  
+    ```
+
+- **Containers and text-resolvers**: When used in render method, leave out the suffix.
 
   ```jsx
   // file 1 contents
@@ -169,14 +180,6 @@ This is how we write React.
   import CheckBox from '../containers/CheckBoxContainer';
   import Dropdown from '../text-resolvers/DropdownTextResolver';
   ```
- - Keep "context" in file names, favouring `SeatMapHeader` over `Header`, but drop it in imports
-    ```jsx
-    // bad
-    import SeatMapHeader from './SeatMapHeader';
-
-    // good
-    import Header from './SeatMapHeader';  
-    ```
 
 - **Higher-order Component Naming**: When possible use the prefix `with...` e.g. `WithLoading`
 
@@ -288,10 +291,9 @@ This is how we write React.
 
      ```jsx
       // bad
-      
+      {
         todos.map((todo, index) => <Todo {...todo} key={index} />);
-      
-
+      }
       // good
       {
         todos.map(todo => <Todo {...todo} key={todo.id} />);
@@ -327,31 +329,32 @@ This is how we write React.
 
 ## Methods
   - Do not bind methods, use arrow functions
-  > Why? Less lines of codes and follow our convention with arrow functions.
+    > Why? Less lines of codes and follow our convention with arrow functions.
 
     ```jsx
-    // bad
-    class extends Component {
-      handleClick() {
-        // do stuff
+      // bad
+      class extends Component {
+        handleClick() {
+          // do stuff
+        }
+
+        render() {
+          return <div onClick={this.handleClick.bind(this)} />;
+        }
       }
 
-      render() {
-        return <div onClick={this.handleClick.bind(this)} />;
-      }
-    }
+      // good
+      class extends Component {
+        handleClick = () => {
+          // do stuff
+        }
 
-    // good
-    class extends Component {
-      handleClick = () => {
-        // do stuff
+        render() {
+          return <div onClick={this.handleClick} />;
+        }
       }
-
-      render() {
-        return <div onClick={this.handleClick} />;
-      }
-    }
     ```
+    
   - Do not use underscore prefix for internal methods of a React component.
       > Why? Underscore prefixes are sometimes used as a convention in other languages to denote privacy. But, unlike those languages, there is no native support for privacy in JavaScript, everything is public. Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private, and any property (underscore-prefixed or not) should be treated as being public. See issues [#1024](https://github.com/airbnb/javascript/issues/1024), and [#490](https://github.com/airbnb/javascript/issues/490) for a more in-depth discussion.
 
