@@ -10,7 +10,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
 
 ## Intro
 
-- Testing a components prop. Have one prop test per it-block. Do not group prop test.
+- Testing a components prop. _Have one prop test per it-block. Do not group prop test._
 
   ```jsx
   // bad
@@ -44,7 +44,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
   });
   ```
 
-- Testing style (`css`) use snapshot. Only test styleing with snapshot. Preferably put it at the top of the test file. 
+- Testing style (`css`) use snapshot. _Only test styleing with snapshot. Preferably put it at the top of the test file._
   ```jsx
     it('renders correctly', () => {
       const component = shallow(<Component />);

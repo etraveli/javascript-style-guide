@@ -18,8 +18,6 @@ This is how we write React.
 
 ## Basic Rules
 
-- Only include one React component per file.
-  - However, multiple [Stateless, or Pure, Components](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions) are allowed per file. eslint: [`react/no-multi-comp`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless).
 - Always use JSX syntax.
 - Do not use `React.createElement` unless you’re initializing the app from a file that is not JSX.
 
@@ -72,7 +70,7 @@ This is how we write React.
 
 ## Stateless
 
-- When not using internal state, use stateless component
+- When not using internal state, or lifecycle methods,  use stateless component
   > Why? We want to keep as functional as possible
   ```jsx
   // bad
@@ -181,7 +179,8 @@ This is how we write React.
   import Dropdown from '../text-resolvers/DropdownTextResolver';
   ```
 
-- **Higher-order Component Naming**: When possible use the prefix `with...` e.g. `WithLoading`
+- **Higher-order Component Naming**: Use the prefix `with...` e.g. `withLoading` with camelCase.
+    Name the wrapping component as such; `WrappedComponent`
 
 
     ```jsx
@@ -195,7 +194,7 @@ This is how we write React.
 
 
     // good
-    const WithLoading = WrappedComponent => props => (
+    const withLoading = WrappedComponent => props => (
       <Loading>
         <WrappedComponent {...props} />
       </Loading>
@@ -221,6 +220,7 @@ This is how we write React.
   ```
 
 - Omit the value of the prop when it is explicitly `true`. eslint: [`react/jsx-boolean-value`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md)
+ Be careful about passing booleans a better way might be to pass an enum.
 
   ```jsx
   // bad
@@ -248,6 +248,7 @@ This is how we write React.
 
 - Do not use words like "image", "photo", or "picture" in `<img>` `alt` props. eslint: [`jsx-a11y/img-redundant-alt`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-redundant-alt.md)
 
+
   > Why? Screenreaders already announce `img` elements as images, so there is no need to include this information in the alt text.
 
   ```jsx
@@ -259,6 +260,7 @@ This is how we write React.
   ```
 
 - Use only valid, non-abstract [ARIA roles](https://www.w3.org/TR/wai-aria/#usage_intro). eslint: [`jsx-a11y/aria-role`](https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/aria-role.md)
+[`MDN aria-roles`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques)
 
   ```jsx
     // bad - not an ARIA role
@@ -285,9 +287,7 @@ This is how we write React.
 
 - Avoid using an array index as `key` prop, prefer a stable ID. eslint: [`react/no-array-index-key`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md)
 
-  > Why? Not using a stable ID [is an anti-pattern](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) because it can negatively impact performance and cause issues with component state.
-
-    We don’t recommend using indexes for keys if the order of items may change.
+  > Why? Not using a stable ID [is an anti-pattern](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318) because it can negatively impact performance and cause issues with component state. Also the order of items might change
 
      ```jsx
       // bad
@@ -328,7 +328,7 @@ This is how we write React.
     ```
 
 ## Methods
-  - Do not bind methods, use arrow functions
+  - Do not class property, use arrow functions
     > Why? Less lines of codes and follow our convention with arrow functions.
 
     ```jsx
@@ -354,13 +354,13 @@ This is how we write React.
         }
       }
     ```
-    
+
   - Do not use underscore prefix for internal methods of a React component.
       > Why? Underscore prefixes are sometimes used as a convention in other languages to denote privacy. But, unlike those languages, there is no native support for privacy in JavaScript, everything is public. Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private, and any property (underscore-prefixed or not) should be treated as being public. See issues [#1024](https://github.com/airbnb/javascript/issues/1024), and [#490](https://github.com/airbnb/javascript/issues/490) for a more in-depth discussion.
 
       ```jsx
       // bad
-      class extends Component {
+      class MyComponent extends Component {
         _onClickSubmit() {
           // do stuff
         },
@@ -369,11 +369,19 @@ This is how we write React.
       });
 
       // good
-      class extends Component {
+      class MyComponent extends Component {
         onClickSubmit() {
           // do stuff
         }
 
+        // other stuff
+      }
+      
+      // private good
+      onClickSubmit = () => {
+        // do stuff
+      }
+      class MyComponent extends Component {
         // other stuff
       }
     ```
@@ -381,8 +389,13 @@ This is how we write React.
 ## PropTypes
 
   - How to define `PropTypes` and `defaultProps`
+  
 
     ```jsx
+    // bad 
+    import PropTypes from 'prop-types';
+    
+    // good
     import PropTypes from 'prop-types';
     
     const User = ({ age, children, name }) => (
@@ -396,6 +409,6 @@ This is how we write React.
     }
     
     User.defaultProps = {
-      name: 'Ulf',
+      name: 'uffe',
     }
     ```

@@ -630,9 +630,6 @@ Other Style Guides
 
   // good
   import foo, { named1, named2 } from 'foo';
-
-  // good
-  import foo, { named1, named2 } from 'foo';
   ```
 
   <a name="modules--default-export"></a><a name="6.4"></a>
@@ -740,6 +737,13 @@ Other Style Guides
 
   // good
   const isJedi = luke.jedi;
+
+  // good
+  const obj = {
+    'the-force': true,
+  }
+  const hasForce = obj['the-force'];
+
   ```
 
 ## Variables
@@ -1037,10 +1041,12 @@ Other Style Guides
   // good
   this.firstName = 'Panda';
 
-  // good, in environments where WeakMaps are available
-  // see https://kangax.github.io/compat-table/es6/#test-WeakMap
-  const firstNames = new WeakMap();
-  firstNames.set(this, 'Panda');
+  // This is private
+  const doStuff = x => x * 1;
+
+  const myFunc = a => doStuff(a);
+
+  export default myFunc
   ```
 
 <a name="naming--self-this"></a><a name="13.5"></a>
@@ -1049,10 +1055,13 @@ Other Style Guides
 
   ```javascript
   // bad
-  function foo() {
-    const self = this;
-    return function() {
-      console.log(self);
+  class {
+    constructor() {
+      document.querySelector('button').addEventListener('click', () => this.handleClick)
+    }
+    
+    handleClick = () => {
+      // ...
     };
   }
 
@@ -1073,43 +1082,42 @@ Other Style Guides
   ```
 
   <a name="naming--filename-matches-export"></a><a name="13.6"></a>
+ - [13.6](#naming--filename-matches-export) A base filename should exactly match the name of its default export.
+ 
+    ```javascript
+    // file 1 contents
+    class CheckBox {
+      // ...
+    }
+    export default CheckBox;
 
-  - [13.6](#naming--filename-matches-export)
+    // file 2 contents
+    const fortyTwo = () => 42;
+    export default fortyTwo;
 
-  ```javascript
-  // file 1 contents
-  class CheckBox {
-    // ...
-  }
-  export default CheckBox;
+    // file 3 contents
+    const insideDirectory = () => {}
+    export default insideDirectory;
 
-  // file 2 contents
-  const fortyTwo = () => 42;
-  export default fortyTwo;
+    // in some other file
+    // bad
+    import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
+    import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
+    import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
 
-  // file 3 contents
-  const insideDirectory = () => {}
-  export default insideDirectory;
+    // bad
+    import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
+    import forty_two from './forty_two'; // snake_case import/filename, camelCase export
+    import inside_directory from './inside_directory'; // snake_case import, camelCase export
+    import index from './inside_directory/index'; // requiring the index file explicitly
+    import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
 
-  // in some other file
-  // bad
-  import CheckBox from './checkBox'; // PascalCase import/export, camelCase filename
-  import FortyTwo from './FortyTwo'; // PascalCase import/filename, camelCase export
-  import InsideDirectory from './InsideDirectory'; // PascalCase import/filename, camelCase export
-
-  // bad
-  import CheckBox from './check_box'; // PascalCase import/export, snake_case filename
-  import forty_two from './forty_two'; // snake_case import/filename, camelCase export
-  import inside_directory from './inside_directory'; // snake_case import, camelCase export
-  import index from './inside_directory/index'; // requiring the index file explicitly
-  import insideDirectory from './insideDirectory/index'; // requiring the index file explicitly
-
-  // good
-  import CheckBox from './CheckBox'; // PascalCase export/import/filename
-  import fortyTwo from './fortyTwo'; // camelCase export/import/filename
-  import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
-  // ^ supports both insideDirectory.js and insideDirectory/index.js
-  ```
+    // good
+    import CheckBox from './CheckBox'; // PascalCase export/import/filename
+    import fortyTwo from './fortyTwo'; // camelCase export/import/filename
+    import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
+    // ^ supports both insideDirectory.js and insideDirectory/index.js
+    ```
 
 ## License
 
