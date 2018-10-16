@@ -125,8 +125,8 @@ Other Style Guides
   ```javascript
   // bad
   const bad = {
-    foo: 3,
-    bar: 4,
+    'foo': 3,
+    'bar': 4,
     'data-blah': 5
   };
 
@@ -217,8 +217,6 @@ Other Style Guides
 
   // good
   const nodes = Array.from(foo);
-
-  // best
   const nodes = [...foo];
   ```
 
@@ -459,10 +457,14 @@ Other Style Guides
 
   ```javascript
   // bad
-  var add = new Function('a', 'b', 'return a + b');
+  const add = new Function('a', 'b', 'return a + b');
 
   // still bad
-  var subtract = Function('a', 'b', 'return a - b');
+  const subtract = Function('a', 'b', 'return a - b');
+  
+  // good
+  const add = (a, b)  => a + b;
+  const subtract = (a, b)  => a - b;
   ```
 
 <a name="functions--reassign-params"></a><a name="4.9"></a>
@@ -491,7 +493,7 @@ Other Style Guides
     // ...
   }
 
-  const f4 = a =>= 1) {
+  const f4 = (a = 1) => {
     // ...
   }
   ```
@@ -641,6 +643,7 @@ Other Style Guides
 
   ```javascript
     // bad
+    export default function() {}
     export default () => {}
 
     // good
