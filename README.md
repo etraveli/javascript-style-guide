@@ -792,6 +792,17 @@ Other Style Guides
 
 - [10.1](#comparison--eqeqeq) Use `===` and `!==` over `==` and `!=`. eslint: [`eqeqeq`](https://eslint.org/docs/rules/eqeqeq.html)
 
+  ```javascript
+    // bad 
+    if (value == 1) {
+      // ...
+    }
+    // good 
+    if (value === 1) {
+      // ...
+    }
+  ```
+
 <a name="comparison--eqeqeq"></a><a name="10.2"></a>
 
 - [10.2](#comparison--Boolean) Use `Boolean` when comparing other values than booleans with double negative (`!!`)
