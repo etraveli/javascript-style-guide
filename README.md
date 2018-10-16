@@ -1120,6 +1120,6 @@ SOFTWARE.
 
 ## Amendments
 
-This style guide was heavinly inspired by Airbnb's guide: https://github.com/airbnb/javascript
+This style guide was heavily inspired by Airbnb's guide: https://github.com/airbnb/javascript
 
 **[⬆ back to top](#table-of-contents)**
