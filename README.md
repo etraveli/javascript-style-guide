@@ -562,11 +562,15 @@ Other Style Guides
   }));
 
   // bad
-  const getObject = (number, index) => {
+  const getObject = (name, value) => {
     return {
-      [index]: number
+      [name]: value
     };
-  });
+
+  // good
+  const getObject = (name, value) => ({
+    [name]: value
+  }));
   ```
 
   **[⬆ back to top](#table-of-contents)**
@@ -785,7 +789,7 @@ Other Style Guides
 
 <a name="comparison--eqeqeq"></a><a name="10.2"></a>
 
-- [10.2](#comparison--Boolean) Use `Boolean` when comparing other values than booleans with double negative `(!!)`
+- [10.2](#comparison--Boolean) Use `Boolean` when comparing other values than booleans with double negative (`!!`)
 
   ```javascript
   // bad
@@ -1089,3 +1093,33 @@ Other Style Guides
   import insideDirectory from './insideDirectory'; // camelCase export/import/directory name/implicit "index"
   // ^ supports both insideDirectory.js and insideDirectory/index.js
   ```
+
+## License
+
+(MIT License)
+
+Copyright (c) 2018 Etraveli Technology
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Amendments
+
+This style guide was heavinly inspired by Airbnb's guide: https://github.com/airbnb/javascript
+
+**[⬆ back to top](#table-of-contents)**
