@@ -739,10 +739,10 @@ Other Style Guides
   const isJedi = luke.jedi;
 
   // good
-  const obj = {
+  const universe = {
     'the-force': true,
   }
-  const hasForce = obj['the-force'];
+  const hasForce = universe['the-force'];
 
   ```
 
@@ -809,8 +809,7 @@ Other Style Guides
   ```
 
 <a name="comparison--eqeqeq"></a><a name="10.2"></a>
-
-- [10.2](#comparison--Boolean) Use `Boolean` when comparing other values than booleans with double negative (`!!`)
+- [10.2](#comparison--Boolean) Use `Boolean` not double negative (`!!`), to cast a value to a boolean
 
   ```javascript
   // bad
