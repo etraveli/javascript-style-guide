@@ -1,6 +1,6 @@
 ## Emotion
 
-We use `Emotion` to go about our styleing 
+We use `Emotion` to go about our styling 
 https://github.com/emotion-js/emotion
 
 ## Table of Contents
