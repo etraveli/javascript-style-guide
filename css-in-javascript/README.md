@@ -6,7 +6,7 @@ https://github.com/emotion-js/emotion
 ## Table of Contents
 
 1. [Intro](#intro)
-1. [Naming](#naming)
+1. [Naming Conventions](#naming-conventions)
 
 ## Intro
 
@@ -33,7 +33,7 @@ https://github.com/emotion-js/emotion
   );
   ```
 
-## Naming
+## Naming Conventions
   - Styled component
     * _Avoid naming such as `Container`, as it collides with our `redux` and `graphql` `containers`_
   ```jsx

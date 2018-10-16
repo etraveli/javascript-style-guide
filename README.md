@@ -1053,17 +1053,6 @@ Other Style Guides
 
   ```javascript
   // bad
-  class {
-    constructor() {
-      document.querySelector('button').addEventListener('click', () => this.handleClick)
-    }
-    
-    handleClick = () => {
-      // ...
-    };
-  }
-
-  // bad
   function foo() {
     const that = this;
     return function() {
