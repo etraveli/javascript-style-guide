@@ -7,7 +7,6 @@ Other Style Guides
 - [React](react/)
 - [Testing](testing/)
 - [CSS](css-in-javascript)
-- [Linters](linters/)
 
 ## Table of Contents
 
