@@ -44,14 +44,14 @@ We use `Jest` and `Enzyme` to test our components and functions.
   });
   ```
 
-- Testing style (`css`) use snapshot. _Only test styleing with snapshot. Preferably put it at the top of the test file._
+- Testing style (`css`) use snapshot. _Only test styling with snapshot. Preferably put it at the top of the test file._
   ```jsx
     it('renders correctly', () => {
       const component = shallow(<Component />);
       expect(component).toMatchSnapshot();
     });
   ```
-  - If styleing changes via a prop you should have a snapshot test for that.
+  - If styling changes via a prop you should have a snapshot test for that.
   ```jsx
   describe('when value is provided', () => {
     it('renders correctly', () => {
@@ -79,20 +79,19 @@ We use `Jest` and `Enzyme` to test our components and functions.
       const lastName = 'lastName';
       const name = 'name';
 
-      utils.getFullname = jest.fn().mockReturnValue(name);
-      // or
-      jest.spyOn('utils', getFullName).mockImplementation(() => name);
-      
+      const getFullnameSpy = jest.spyOn(utils, 'getFullName').mockImplementation(() => name);
+
       const component = shallow(<Component firstName={firstName} lastName={lastName} />);
       
       expect(utils.getName).toHaveBeenCalledWith(firstName, lastName);
       expect(component.find('p').text()).toBe(name);
+      getFullnameSpy.mockRestore();
     });
   ```
 
 ## Describe-blocks
 
-- How to write a describes, our way. Let's say you have this case; if `age` prop is true, render `Adult` component, otherwise render `Child`
+- How to write a describe block, our way. Let's say you have this case; if `age` prop is true, render `Adult` component, otherwise render `Child`
 
   ```jsx
   import React from 'react';
