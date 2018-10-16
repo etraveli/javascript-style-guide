@@ -1067,8 +1067,8 @@ Other Style Guides
   export default CheckBox;
 
   // file 2 contents
-    const fortyTwo = () => 42;
-    export default fortyTwo;
+  const fortyTwo = () => 42;
+  export default fortyTwo;
 
   // file 3 contents
   const insideDirectory = () => {}
