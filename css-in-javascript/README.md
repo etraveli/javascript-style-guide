@@ -57,6 +57,7 @@ https://github.com/emotion-js/emotion
 
   ```
   - css
+    * _Use suffix `styles` with a start of lowercase e.g. `wrapperStyle`_
   ```jsx
     // bad
     const paragraph = css`

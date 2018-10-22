@@ -787,6 +787,20 @@ Other Style Guides
   }
   ```
 
+<a name="contants"></a><a name="10.4"></a>
+
+- [9.2](#contstans) Use uppercase with snake case
+    > Why? It seperates a final constant from regular variables.
+
+    ```javascript
+      // bad
+      const thisIsAConstant= 'example';
+
+      // good
+      const THIS_IS_A_CONSTANT = 'example';
+    ```
+
+
   **[⬆ back to top](#table-of-contents)**
 
 ## Comparison Operators & Equality
