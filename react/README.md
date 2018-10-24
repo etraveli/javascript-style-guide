@@ -20,6 +20,7 @@ This is how we write React.
 
 - Always use JSX syntax.
 - Do not use `React.createElement` unless you’re initializing the app from a file that is not JSX.
+- When a class component contains logic it should be called and located in the component folder. A container is redux (`FlightContainer.jsx`) and graphql related i.e. (`FlightGraphqlContainer`). 
 
 ## Class
 
