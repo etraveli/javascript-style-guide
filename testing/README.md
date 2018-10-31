@@ -172,8 +172,10 @@ We use `Jest` and `Enzyme` to test our components and functions.
   ```jsx
     // bad 
 
+    // text resolvers
     headerTextResolver.js
     HeaderTextResolver.jsx
+
     // containers
     headerTextContainer.js
     HeaderTextContainer.test.jsx
@@ -183,12 +185,15 @@ We use `Jest` and `Enzyme` to test our components and functions.
     // text resolvers
     HeaderTextResolver.jsx
     HeaderTextResolver.test.jsx
+
     // containers
     HeaderTextContainer.jsx
     HeaderTextContainer.test.jsx
+
     // components
     Header.jsx
     Heder.test.jsx
+
     // util functions
     header.js
     header.test.js
