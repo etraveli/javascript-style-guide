@@ -7,6 +7,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
 1. [Intro](#intro)
 1. [Describe](#describe-blocks)
 1. [It](#it-blocks)
+1. [Naming](#naming)
 
 ## Intro
 
@@ -137,4 +138,58 @@ We use `Jest` and `Enzyme` to test our components and functions.
     // test stuff
   });
 
+  ```
+
+## Styled components
+- If you want to test that a text has been rendered in a styled component use `displayName` instead of exporting it and then importing it in the test file 
+  ```jsx
+  // bad
+  export const Text = styled('p')`...`
+  
+  import Component, { Text } from '../Component';
+
+  it('text is rendered', () => {
+    const text = 'text';
+    const component = shallow(<Component text={text} />);
+    expect(component.find(Text).text()).toBe(text);
+  });
+
+  // good
+  const Text = styled('p')`...`
+  Text.displayName = 'Text';
+  
+  import Component from '../Component';
+
+  it('text is rendered', () => {
+    const text = 'text';
+    const component = shallow(<Component text={text} />);
+    expect(component.find('Text').text()).toBe(text);
+  });
+  ```
+
+## Naming
+- The test file should have the same name as the file it's testing. 
+  ```jsx
+    // bad 
+
+    headerTextResolver.js
+    HeaderTextResolver.jsx
+    // containers
+    headerTextContainer.js
+    HeaderTextContainer.test.jsx
+
+    // good    
+
+    // text resolvers
+    HeaderTextResolver.jsx
+    HeaderTextResolver.test.jsx
+    // containers
+    HeaderTextContainer.jsx
+    HeaderTextContainer.test.jsx
+    // components
+    Header.jsx
+    Heder.test.jsx
+    // util functions
+    header.js
+    header.test.js
   ```
