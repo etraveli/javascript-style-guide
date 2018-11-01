@@ -7,6 +7,7 @@ We use `Jest` and `Enzyme` to test our components and functions.
 1. [Intro](#intro)
 1. [Describe](#describe-blocks)
 1. [It](#it-blocks)
+1. [Styled components](#styled-components)
 1. [Naming](#naming)
 
 ## Intro
