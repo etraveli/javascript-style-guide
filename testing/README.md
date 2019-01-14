@@ -45,6 +45,34 @@ We use `Jest` and `Enzyme` to test our components and functions.
   });
   ```
 
+
+- Skip the `length` test if you are also testing a prop for example
+  ```jsx
+    // bad
+    describe('Component', () => {
+      it('is rendered', () => {
+        const component = shallow(<Component />);
+        expect(component.find(OtherComponent).length).toBe(1);
+      });
+      
+      it('passes value', () => {
+        const value = 'value';
+        const component = shallow(<Component value={value} />);
+        expect(component.find(OtherComponent).prop('value')).toBe(value);
+      });
+    });
+    
+    // good
+    describe('Component', () => {
+      it('passes value', () => {
+        const value = 'value';
+        const component = shallow(<Component value={value} />);
+        expect(component.find(OtherComponent).prop('value')).toBe(value);
+      });
+    });
+  ```
+
+
 - Testing style (`css`) use snapshot. _Only test styling with snapshot. Preferably put it at the top of the test file._
   ```jsx
     it('renders correctly', () => {
