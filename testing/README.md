@@ -69,6 +69,24 @@ We use `Jest` and `Enzyme` to test our components and functions.
     });
   });
   ```
+  
+  - Testing a `styled-component` 
+  > Don't export the component, access it via a string. We automatically set `displayName` on `styled-components`
+  ```jsx
+  // bad 
+  import { StyledComponent } from './';
+
+  it('renders correctly', () => {
+    const component = shallow(<Component />);
+    expect(component.find(StyledComponent)).toMatchSnapshot();
+  });
+
+  // good
+  it('renders correctly', () => {
+    const component = shallow(<Component />);
+    expect(component.find('StyledComponent')).toMatchSnapshot();
+  });
+  ```
 
 
 - Mocking a function
