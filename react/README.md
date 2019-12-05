@@ -61,7 +61,7 @@ This is how we write React.
 
     ```jsx
     // bad
-    const withSubscription = WrappedComponent => 
+    const withName = WrappedComponent => 
         class extends Component {
           state = { name: '' };        
 
