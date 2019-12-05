@@ -4,23 +4,95 @@ This is how we write React.
 
 ## Table of Contents
 
-1. [Basic Rules](#basic-rules)
-1. [Class](#class)
-1. [Stateless](#stateless)
-1. [Destructuring](#destructuring)
-1. [Naming](#naming)
-1. [Props](#props)
-1. [Refs](#refs)
-1. [Parentheses](#parentheses)
-1. [Tags](#tags)
-1. [Methods](#methods)
-1. [PropTypes](#prop-types)
+- [Etraveli React/JSX Style Guide](#etraveli-reactjsx-style-guide)
+  - [Table of Contents](#table-of-contents)
+  - [Basic Rules](#basic-rules)
+  - [Class vs functional component](#class-vs-functional-component)
+  - [Hooks vs HOC'S](#hooks-vs-hocs)
+  - [Class](#class)
+  - [Stateless](#stateless)
+  - [Destructuring](#destructuring)
+  - [Naming](#naming)
+  - [Props](#props)
+  - [Methods](#methods)
+  - [PropTypes](#proptypes)
 
 ## Basic Rules
 
 - Always use JSX syntax.
 - Do not use `React.createElement` unless you’re initializing the app from a file that is not JSX.
 - When a class component contains logic it should be called and located in the component folder. A container is redux (`FlightContainer.jsx`) and graphql related i.e. (`FlightGraphqlContainer`). 
+
+## Class vs functional component
+  * Use functional components rather than class components
+    > Why? Less boilerplate and is more align to the community
+
+    ```jsx
+    // bad
+    class User extends Component {
+      state = { name: '' }
+
+      handleName = value => {
+        this.setState({ name: value });
+      }
+      render(){
+        return (
+          ...
+        );
+      }
+    }
+
+    // good
+    const User = () => {
+      const [name, setName] = useState('');
+
+      const handleName = value => {
+        setName(value);
+      }
+      return (
+        ...
+      );
+    }
+    ```
+
+## Hooks vs HOC'S
+  * Use hooks rather than HOC's
+    > Why? It's easier to reason about the logic/structure when the code is closer to the component. The boilerplate code is less with hooks
+
+    ```jsx
+    // bad
+    const withSubscription = WrappedComponent => 
+        class extends Component {
+          state = { name: '' };        
+
+        componentDidMount() {
+          // magic
+        }
+
+        handleChange = value => {
+          this.setState({ name: value });
+        }
+
+        render() {
+          return <WrappedComponent name={this.state.name} handleChange={this.handleChange} {...this.props} />;
+        }
+      };
+
+    // good
+    const useName = () => {
+      const [name, setName] = useState('');
+
+      useEffect(()=> {
+        // magic
+      }, []);
+
+      const handleChange = value => {
+        setName(value);
+      }
+
+      return [name, handleChange];
+    }
+    ```
 
 ## Class
 
@@ -179,6 +251,25 @@ This is how we write React.
   import CheckBox from '../containers/CheckBoxContainer';
   import Dropdown from '../text-resolvers/DropdownTextResolver';
   ```
+
+- **Hooks naming**: Use the prefix `use...` e.g. `useLoading` with camelCase.
+
+    ```jsx
+
+    // bad
+    const LoadingHook = () => {
+      const [loading, setLoading] = useState(false); 
+      // magic happening here
+      return [loading, setLoading];
+    }
+
+    // good
+    const useLoading = () => {
+      const [loading, setLoading] = useState(false); 
+      // magic happening here
+      return [loading, setLoading];
+    }
+    ```
 
 - **Higher-order Component Naming**: Use the prefix `with...` e.g. `withLoading` with camelCase.
     Name the wrapping component as such; `WrappedComponent`
