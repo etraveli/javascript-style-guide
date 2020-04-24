@@ -229,7 +229,7 @@ If the props stay the same - assert everything that you can inside one test bloc
 const FooBar = ({ foo, bar, label, text }) => (
   <div>
     <span>{label}</span>
-    {foo ? <p>{bar}</p> : <p>{text}</p>
+    {foo ? <p>{bar}</p> : <p>{text}</p>}
   </div>
 );
 
