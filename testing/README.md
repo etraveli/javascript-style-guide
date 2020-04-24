@@ -6,7 +6,7 @@ We use `Jest` and `React-testing-library` to test our components and functions.
 
   - [Utils](#utils)
   - [it vs test](#it-vs-test)
-  - [Isolate instances, clean up after each](#isolate-instances,-clean-up-after-each)
+  - [Isolate instances](#isolate-instances)
   - [Text](#text)
   - [Interaction with fields](#interaction-with-fields)
   - [Misc](#misc)
@@ -59,7 +59,7 @@ it and test are considered the same. But you should use test when writing your t
  > - jest write test in their documentation on how to write tests
  > - Distinguish which tests are written in enzyme and which are in react-testing-library.
 
-## Isolate instances, clean up after each
+## Isolate instances
 
 As our current test setup is we SHOULD NOT write tests that use the same instance of the component, like this:
 ```jsx
