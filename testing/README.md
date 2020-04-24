@@ -215,9 +215,13 @@ const Foo = () => <Icon />
 // test file
 import { render, waitFor } from '@testing-library/react';
 
-test("svg is rendered", () => {
+test('svg is rendered', () => {
   const { getByText } = render(<Foo />);
   await waitFor(() => getByText('icon.svg'));
+  // since await function from testing-library throw an error
+  // if the element isn't found.
+  // which means that we don't really need to actually assert that the 
+  // `icon.svg` is in the document
 });
 
 ```
@@ -251,7 +255,9 @@ test('text is rendered when foo is false', () => {
     const text = 'text';
     const bar = 'bar';
     const label = 'label';
-    const { getByText, queryByText } = render(FooBar foo={false} text={text} bar={bar} label={label} />);
+    const { getByText, queryByText } = render(
+      <FooBar foo={false} text={text} bar={bar} label={label} />
+    );
     expect(queryByText(bar)).not.toBeInTheDocument();  
     expect(getByText(text)).toBeInTheDocument();   
 });
