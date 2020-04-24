@@ -201,32 +201,47 @@ const Foo = ({ prop1, prop2, prop3, ...rest }) => (
     <AnotherComponent {...rest} />
   </section>
 );
-
 ```
 Sometimes we have components like this just because it reads better. This component might not even be necessary and the code should reside in the component above. But if it feels like a good idea to have a component like this, you should, of course, introduce it. But does it really need a test file? With enzyme you could prop test this. But that doesn't necessarily mean that it's a good approach. You could argue that the component above should have tests and the 3 components that renders or have some other sort of logic should have tests. If you feel safe with that - don't write test for this Foo component.
 
 
+How you use async helper functions
+```jsx
+import Icon from '../icon.svg';
+
+const Foo = () => <Icon />
+
+
+// test file
+import { render, waitFor } from '@testing-library/react';
+
+test("svg is rendered", () => {
+  const { getByText } = render(<Foo />);
+  await waitFor(() => getByText('icon.svg'));
+});
+
+```
+
+
 What assertions goes in to one test block?
-If the props stay the same assert everything that you can inside one test block. That goes for snapshot testing as well.
+If the props stay the same - assert everything that you can inside one test block.
 ```jsx
 const FooBar = ({ foo, bar, label, text }) => (
   <div>
-    <span style={{ color: 'red' }}>{foo ? bar : label}</span>
-    <p>{text}</p>
+    <span>{label}</span>
+    {foo ? <p>{bar}</p> : <p>{text}</p>
   </div>
 );
 
 // FooBar.test.jsx
-test('text is rendered when foo is true', () => {
+test('bar is rendered when foo is true', () => {
     const text = 'text';
     const bar = 'bar';
     const label = 'label';
-    const { container, getByText, queryByText } = render(FooBar foo text={text} bar={bar} label={label} />);
+    const { getByText, queryByText } = render(FooBar foo text={text} bar={bar} label={label} />);
     expect(getByText(bar)).toBeInTheDocument();
-    expect(queryByText(label)).not.toBeInTheDocument();
-    // here we assert text and snapshot in this block to keep our test suite fast
-    expect(getByText(text)).toBeInTheDocument();   
-    expect(container.firstChild).toMatchSnapshot();
+    expect(getByText(label)).toBeInTheDocument();
+    expect(queryByText(text)).not.toBeInTheDocument();   
 });
  
  
@@ -235,8 +250,8 @@ test('text is rendered when foo is false', () => {
     const bar = 'bar';
     const label = 'label';
     const { getByText, queryByText } = render(FooBar foo={false} text={text} bar={bar} label={label} />);
-    expect(getByText(label)).toBeInTheDocument();  
     expect(queryByText(bar)).not.toBeInTheDocument();  
+    expect(getByText(text)).toBeInTheDocument();   
 });
 ```
 
