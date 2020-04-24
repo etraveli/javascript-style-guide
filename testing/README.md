@@ -238,7 +238,9 @@ test('bar is rendered when foo is true', () => {
     const text = 'text';
     const bar = 'bar';
     const label = 'label';
-    const { getByText, queryByText } = render(FooBar foo text={text} bar={bar} label={label} />);
+    const { getByText, queryByText } = render(
+      <FooBar foo text={text} bar={bar} label={label} />
+    );   
     expect(getByText(bar)).toBeInTheDocument();
     expect(getByText(label)).toBeInTheDocument();
     expect(queryByText(text)).not.toBeInTheDocument();   
