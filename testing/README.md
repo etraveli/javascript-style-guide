@@ -13,45 +13,18 @@ We use `Jest` and `React-testing-library` to test our components and functions.
    
 ## Utils
 
-When mounting components you probably need to add some Providers in your render function. There are util functions that can help you, they are located in @eti/test-utils. Here are the functions and how to use them.
+When mounting components you probably need to add some Providers in your render function. There are a util function that can help you, it is located in @eti/test-utils. Here is an example on how to use it.
 ```jsx
 import { reduxForm } from 'redux-form';
-import {
-  renderWithReduxProvider,
-  renderWithReduxAndTextsProvider,
-  renderWithTextsProvider,
-  renderWithProviders,
-} from '@eti/test-utils';
+import { renderWithProviders } from '@eti/test-utils';
  
 // This functions is the preferred one, it contains all of our newer providers, such as `DirectionsProvider`, `TranslationsProvider` and `SiteContextProvider` but _not_ the old text-provider
 const FormField = reduxForm({ form: 'form' })(Component)
-const { container } = renderWithReduxProvider(<FormField {...props} />,
+const { … } = renderWithProviders(<FormField {...props} />,
 {
-  // here you can pass in different props
+  // here you can pass in different props like `translations`, or `state`
 });
- 
-// This function is for redux - most probably you will need it in a redux-form context.
-const state = {
-  ifYouNeedAdditionalState: 'pass it here'
-};
-const FormField = reduxForm({ form: 'form' })(Component);
-const { container } = renderWithReduxProvider(<FormField {...props} />, state);
- 
-// For components that are wrapping text-resolvers.
-// Feel free to pass text to the function and test that it is rendered.
-// that way we don't need to write a test for our text-resolvers but test what actually is being rendered.
-const texts = {
-  'App.Label': 'Hello',
-};
-const { container } = renderWithTextsProvider(<Component {...props} />, texts);
- 
-// a combination of both above
-const { container } = renderWithReduxAndTextsProvider(
-  <FormField {...props} />,
-  state,
-  texts,
-);
-```
+ ```
 ## it vs test
 
 it and test are considered the same. But you should use test when writing your tests in react-testing-library for 2 reasons
@@ -97,18 +70,18 @@ With that in mind, we could write our tests like this instead:
 ```jsx
 describe('Counter', () => {
   test('that text appears every time button is clicked', () => {
-    const { getByText, queryByText } = render(<Counter />);
+    render(<Counter />);
     const button = getByText('button');
     fireEvent.click(button);
  
-    expect(getByText('firstText')).toBeInTheDocument();
-    // use queryByText when accessing a dom-element that might be null
-    expect(queryByText('secondText')).not.toBeInTheDocument();
+    expect(screen.getByText('firstText')).toBeInTheDocument();
+    // use screen.queryByText when accessing a dom-element that might be null
+    expect(screen.queryByText('secondText')).not.toBeInTheDocument();
  
     fireEvent.click(button);
  
-    expect(getByText('firstText')).toBeInTheDocument();
-    expect(getByText('secondText')).toBeInTheDocument();
+    expect(screen.getByText('firstText')).toBeInTheDocument();
+    expect(screen.getByText('secondText')).toBeInTheDocument();
   });
 });
 ```
@@ -137,14 +110,14 @@ test('title is rendered', () => {
   const translations = {
     'Text.Title': title,
   };
-  const { getByText } = renderWithProviders(
+  renderWithProviders(
     <Component />,
   { translations }
   );
  
-  expect(getByText(title)).toBeInTheDocument();
+  expect(screen.getByText(title)).toBeInTheDocument();
   // or with regex
-  expect(getByText(/title/i)).toBeInTheDocument();
+  expect(screen.getByText(/title/i)).toBeInTheDocument();
 });
   
 // you can also do it with data-testid and toHaveTextContent
@@ -153,11 +126,11 @@ test('that title is rendered', () => {
   const translations = {
     'Text.Title': title,
   };
-  const { getByTestId } = renderWithProviders(
+  renderWithProviders(
     <Component />,
   { translations }
   );
-  expect(getByTestId('header')).toHaveTextContent(title);
+  expect(screen.getByTestId('header')).toHaveTextContent(title);
 });
 ```
 
@@ -176,7 +149,7 @@ test('value and label', () => {
   const placeholder = 'placeholder';
   const form = 'form';
   const FormField = reduxForm({ form })(Comp);
-  const { getByText, getByPlaceholderText } = renderWithProviders(
+  renderWithProviders(
     <FormField form={form} placeholder={placeholder} />,
     {
       translations: { 'Label.TextKey': label },
@@ -184,10 +157,10 @@ test('value and label', () => {
     },
   );
   const value = 'value';
-  const input = getByPlaceholderText(placeholder);
+  const input = screen.getByPlaceholderText(placeholder);
   fireEvent.change(input, { target: { value } });
   expect(input.value).toBe(value);
-  expect(getByText(label)).toBeInTheDocument();
+  expect(screen.getByText(label)).toBeInTheDocument();
 });
 
 ```
@@ -211,13 +184,12 @@ import Icon from '../icon.svg';
 
 const Foo = () => <Icon />
 
-
 // test file
-import { render, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 test('svg is rendered', () => {
-  const { getByText } = render(<Foo />);
-  await waitFor(() => getByText('icon.svg'));
+  render(<Foo />);
+  await screen.findByText('icon.svg'));
   // since await function from testing-library throw an error
   // if the element isn't found.
   // which means that we don't really need to actually assert that the 
@@ -242,12 +214,12 @@ test('bar is rendered when foo is true', () => {
     const text = 'text';
     const bar = 'bar';
     const label = 'label';
-    const { getByText, queryByText } = render(
+    render(
       <FooBar foo text={text} bar={bar} label={label} />
     );   
-    expect(getByText(bar)).toBeInTheDocument();
-    expect(getByText(label)).toBeInTheDocument();
-    expect(queryByText(text)).not.toBeInTheDocument();   
+    expect(screen.getByText(bar)).toBeInTheDocument();
+    expect(screen.getByText(label)).toBeInTheDocument();
+    expect(screen.queryByText(text)).not.toBeInTheDocument();   
 });
  
  
@@ -255,11 +227,11 @@ test('text is rendered when foo is false', () => {
     const text = 'text';
     const bar = 'bar';
     const label = 'label';
-    const { getByText, queryByText } = render(
+    render(
       <FooBar foo={false} text={text} bar={bar} label={label} />
     );
-    expect(queryByText(bar)).not.toBeInTheDocument();  
-    expect(getByText(text)).toBeInTheDocument();   
+    expect(screen.queryByText(bar)).not.toBeInTheDocument();  
+    expect(screen.getByText(text)).toBeInTheDocument();   
 });
 ```
 
