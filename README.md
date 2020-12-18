@@ -84,40 +84,9 @@ Other Style Guides
   const item = {};
   ```
 
-<a name="objects--grouped-shorthand"></a><a name="2.2"></a>
-
-- [2.2](#objects--grouped-shorthand) Group your shorthand properties at the beginning of your object declaration. The rest should be in alphabetic order
-
-  > Why? It’s easier to tell which properties are using the shorthand.
-
-  ```javascript
-  const anakinSkywalker = 'Anakin Skywalker';
-  const lukeSkywalker = 'Luke Skywalker';
-
-  // bad
-  const obj = {
-    episodeOne: 1,
-    twoJediWalkIntoACantina: 2,
-    lukeSkywalker,
-    episodeThree: 3,
-    mayTheFourth: 4,
-    anakinSkywalker
-  };
-
-  // good
-  const obj = {
-    anakinSkywalker,
-    lukeSkywalker,
-    episodeOne: 1,
-    episodeThree: 3,
-    mayTheFourth: 4,
-    twoJediWalkIntoACantina: 2
-  };
-  ```
-
   <a name="objects--quoted-props"></a><a name="2.3"></a>
 
-- [2.3](#objects--quoted-props) Only quote properties that are invalid identifiers. eslint: [`quote-props`](https://eslint.org/docs/rules/quote-props.html)
+- [2.2](#objects--quoted-props) Only quote properties that are invalid identifiers. eslint: [`quote-props`](https://eslint.org/docs/rules/quote-props.html)
 
   > Why? In general we consider it subjectively easier to read. It improves syntax highlighting, and is also more easily optimized by many JS engines.
 
@@ -139,7 +108,7 @@ Other Style Guides
 
 <a name="objects--rest-spread"></a><a name="2.4"></a>
 
-- [2.4](#objects--rest-spread) Prefer the object spread operator over [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
+- [2.3](#objects--rest-spread) Prefer the object spread operator over [`Object.assign`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) to shallow-copy objects. Use the object rest operator to get a new object with certain properties omitted.
 
   ```javascript
   // very bad
@@ -439,23 +408,7 @@ Other Style Guides
   };
   ```
 
-<a name="functions--defaults-last"></a><a name="4.7"></a>
-
-- [4.7](#functions--defaults-last) Always put default parameters last.
-
-  ```javascript
-  // bad
-  const handleThings = (opts = {}, name) => {
-    // ...
-  }
-
-  // good
-  const handleThings = (name, opts = {}) => {
-    // ...
-  }
-  ```
-
-<a name="functions--constructor"></a><a name="4.8"></a>
+<a name="functions--constructor"></a><a name="4.7"></a>
 
 - [4.8](#functions--constructor) Never use the Function constructor to create a new function. eslint: [`no-new-func`](https://eslint.org/docs/rules/no-new-func)
 
@@ -473,7 +426,7 @@ Other Style Guides
   const subtract = (a, b)  => a - b;
   ```
 
-<a name="functions--reassign-params"></a><a name="4.9"></a>
+<a name="functions--reassign-params"></a><a name="4.8"></a>
 
 - [4.9](#functions--reassign-params) Never reassign parameters. eslint: [`no-param-reassign`](https://eslint.org/docs/rules/no-param-reassign.html)
 
@@ -485,7 +438,7 @@ Other Style Guides
     a = 1;
     // ...
   }
-
+  // bad
   const f2 = a => {
     if (!a) {
       a = 1;
@@ -498,7 +451,7 @@ Other Style Guides
     const b = a || 1;
     // ...
   }
-
+  // best
   const f4 = (a = 1) => {
     // ...
   }
