@@ -480,13 +480,11 @@ This is how we write React.
 
 ## PropTypes
 
-  - How to define `PropTypes` and `defaultProps`. _Define the variable with PascalCase since `PropTypes` is a constructor._
-  
-
-    ```jsx
+  - How to define `PropTypes`.  _Define the variable with PascalCase since `PropTypes` is a constructor._
+      ```jsx
     import PropTypes from 'prop-types';
     
-    const User = ({ age, children, name }) => (
+    const User = ({ age, children, name = }) => (
       // do stuff
     )
 
@@ -495,8 +493,17 @@ This is how we write React.
       name: PropTypes.string.isRequired,
       children: PropTypes.node,
     }
-    
+    ```
+
+## Default props 
+  - Prefer default parameters rather than `defaultProps`
+    ```jsx
+    // bad
+    const User = ({ name }) => <div>{name}</div>
+
     User.defaultProps = {
-      name: 'uffe',
+      name: 'John'
     }
+    // good
+    const User = ({ name = 'John' }) => <div>{name}</div>
     ```
