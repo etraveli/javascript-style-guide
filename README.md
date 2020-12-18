@@ -249,13 +249,18 @@ Other Style Guides
 
 <a name="arrays--callback-return"></a><a name="3.7"></a>
 
-- [3.7](#arrays--callback-return) Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following [8.2](#arrows--implicit-return). eslint: [`array-callback-return`](https://eslint.org/docs/rules/array-callback-return)
+- [3.7](#arrays--callback-return) Use return statements in array method callbacks. It’s ok to omit the return if the function body consists of a single statement returning an expression without side effects, following eslint: [`array-callback-return`](https://eslint.org/docs/rules/array-callback-return)
 
   ```javascript
   // good
   [1, 2, 3].map(x => {
     const y = x + 1;
     return x * y;
+  });
+
+  // good
+  [1, 2, 3].map(x => {
+    return x + 1;
   });
 
   // good
@@ -545,37 +550,6 @@ Other Style Guides
     const y = x + 1;
     return x * y;
   });
-  ```
-
-<a name="arrows--implicit-return"></a><a name="5.3"></a>
-
-- [5.3](#arrows--implicit-return) If the function body consists of a single statement returning an [expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) without side effects, omit the braces and use the implicit return. Otherwise, keep the braces and use a `return` statement. eslint: [`arrow-parens`](https://eslint.org/docs/rules/arrow-parens.html), [`arrow-body-style`](https://eslint.org/docs/rules/arrow-body-style.html)
-
-  > Why? Syntactic sugar. It reads well when multiple functions are chained together.
-
-  ```javascript
-  // bad
-  [1, 2, 3].map((number, index) => {
-    return {
-      [index]: number
-    };
-  });
-
-  // good
-  [1, 2, 3].map((number, index) => ({
-    [index]: number
-  }));
-
-  // bad
-  const getObject = (name, value) => {
-    return {
-      [name]: value
-    };
-
-  // good
-  const getObject = (name, value) => ({
-    [name]: value
-  }));
   ```
 
   **[⬆ back to top](#table-of-contents)**
